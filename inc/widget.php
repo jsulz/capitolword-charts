@@ -1,5 +1,8 @@
 <?php
 
+//no use for this yet - may delete later
+//in the interim, keep around in case you can think of a reason to use this bugger!
+
 add_action( 'widgets_init', 'register_unique_widget_name' );
 
 //register widget
