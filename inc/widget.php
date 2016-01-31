@@ -79,5 +79,3 @@ class Unique_Widget_Name extends WP_Widget {
 }
 
 ?>
-
-?>

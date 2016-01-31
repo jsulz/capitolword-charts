@@ -38,14 +38,21 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 	    //the constants (folders and such)
 		public function plugin_constants() {
 
+			//folders and files
 			define( 'CAPITOLWORDS_CHARTS', plugin_dir_path( __FILE__ ) );
+			define( 'CAPITOLWORDS_CHARTS_LOCAL', plugin_dir_url( __FILE__ ) );
 			define( 'CAPITOLWORDS_INC', trailingslashit( CAPITOLWORDS_CHARTS . 'inc' ) );
-			define( 'CAPITOLWORDS_CSS', trailingslashit( CAPITOLWORDS_CHARTS . 'css' ) );
-			define( 'CAPITOLWORDS_JS', trailingslashit( CAPITOLWORDS_CHARTS . 'js' ) );
+			define( 'CAPITOLWORDS_CSS', trailingslashit( CAPITOLWORDS_CHARTS_LOCAL . 'css' ) );
+			define( 'CAPITOLWORDS_JS', trailingslashit( CAPITOLWORDS_CHARTS_LOCAL . 'js' ) );
+			define( 'CHARTJS', trailingslashit( CAPITOLWORDS_CHARTS_LOCAL . 'chartjs' ) );
 			define( 'CAPITOLWORDS_SHORTCODES', CAPITOLWORDS_INC . 'shortcodes.php');
 			define( 'CAPITOLWORDS_WIDGET', CAPITOLWORDS_INC . 'widget.php' );
 			define( 'CAPITOLWORDS_API_CLIENT', CAPITOLWORDS_INC . 'client.php' );
-			define( 'CAPITOLWORDS_SCRIPTS', CAPITOLWORDS_INC . 'scripts.php' );
+
+			//Version constants
+			define( 'MAIN_CSS_VER', 1.0 );
+			define( 'MAIN_JS_VER', 1.0 );
+			define( 'CHARTJS_VER', 1.02);
 
 		}
 
@@ -53,7 +60,6 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 		public function plugin_requires() {
 
 			require( CAPITOLWORDS_SHORTCODES );
-			require( CAPITOLWORDS_SCRIPTS ) ;
 			require( CAPITOLWORDS_WIDGET );
 			require( CAPITOLWORDS_API_CLIENT );
 
@@ -64,6 +70,14 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 
 	    	load_plugin_textdomain( 'text-domain', FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
+		}
+
+		public function load_all_scripts() {
+
+			wp_enqueue_style( 'capitolwords-styles', CAPITOLWORDS_CSS . 'styles.css', array(), MAIN_CSS_VER, 'all' );
+			wp_enqueue_script( 'main-js', CAPITOLWORDS_JS . 'main.js', array('jquery'), MAIN_JS_VER, true );
+			wp_enqueue_script( 'chartjs', CHARTJS . 'Chart.js', array(), CHARTJS_VER, false );
+		
 		}
 		
 	}
