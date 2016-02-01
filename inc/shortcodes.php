@@ -6,7 +6,15 @@ if( ! defined( 'ABSPATH' ) ) exit;
 
 class CAPITOLWORDS_SHORTCODES {
 
-	public function setup_shortcode() {
+	public function __construct() {
+
+		add_shortcode( 'capitalwords', array( $this, 'setup_shortcode' ) );
+
+	}
+
+	public function setup_shortcode( $atts ) {
+
+		$client = new CAPITOLWORDS_CLIENT();
 
 		$atts = shortcode_atts( array(
 
@@ -20,16 +28,26 @@ class CAPITOLWORDS_SHORTCODES {
 
 		//set up years so that they include month and date format as expected by Capitol Words API
 		//dates will always start and end January first of the given year
-		$atts['start_year'] .= '01-01';
-		$atts['end_year'] .= '01-01';
+		//format is in YYYY-MM-DD
+		$atts['start_year'] .= '-01-01';
+		$atts['end_year'] .= '-01-01';
 
-		CAPITOLWORDS_CLIENT::parse_shortcode_atts($atts);
+
+		$client->parse_shortcode_atts( $atts );
+
+		$handoff_url = $client->get_final_url();
+
+		wp_localize_script( 'main-js', 'postdata', array(
+
+				'json_url' => $handoff_url
+
+			) );
 
 		$baseline_html = '';
 
-		$baseline_html .= '<a href="#" id="capitolwordsshort">';
-		$baseline_html .= '<div class="see-chart-button">' . $atts['label'] . '</div>';
-		$baseline_html .= '</a>'
+		$baseline_html .= '<div class="see-chart-button">'; 
+		$baseline_html .= '<a href="#" class="capitolwordsshort">' . $atts['label'] . '</a>';
+		$baseline_html .= '</div>';
 
 		return $baseline_html; 
 
@@ -37,10 +55,6 @@ class CAPITOLWORDS_SHORTCODES {
 
 }
 
-function capitol_words_shortcodes() {
-	return CAPITOLWORDS_SHORTCODES::setup_shortcode();
-}
-
-add_shortcode( 'capitalwords', 'capitol_words_shortcodes' );
+$capitol_shortcodes = new CAPITOLWORDS_SHORTCODES();
 
 ?>
