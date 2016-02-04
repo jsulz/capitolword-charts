@@ -18,6 +18,7 @@
 			//console.log(response);
 			$.each( response, function(results, object){
 				$.each(object, function(key, object){
+					console.log(object);
 					labels.push(object.year);
 					points.push(object.count);
 				});
