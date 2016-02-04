@@ -27,6 +27,7 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 	                self::$instance->plugin_constants( );
 	                self::$instance->plugin_requires( );
 	                add_action( 'wp_enqueue_scripts', array( self::$instance, 'load_all_scripts' ) );
+	                add_action( 'admin_enqueue_scripts', array( self::$instance, 'load_admin_scripts' ) );
 	                //check when text domain can be queued up and load appropriately
 
 	            }
@@ -48,10 +49,13 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 			define( 'CAPITOLWORDS_SHORTCODES', CAPITOLWORDS_INC . 'shortcodes.php');
 			define( 'CAPITOLWORDS_WIDGET', CAPITOLWORDS_INC . 'widget.php' );
 			define( 'CAPITOLWORDS_API_CLIENT', CAPITOLWORDS_INC . 'client.php' );
+			define( 'CAPITOLWORDS_ADMIN', trailingslashit( CAPITOLWORDS_CHARTS . 'admin' ) );
+			define( 'CAPITOLWORDS_SETTINGS_PAGE', CAPITOLWORDS_ADMIN . 'settings_page.php' );
+			define( 'CAPITOLWORDS_POST_META_BOX', CAPITOLWORDS_ADMIN . 'post_meta_box.php' );
 
 			//Version constants
-			define( 'MAIN_CSS_VER', 1.0 );
-			define( 'MAIN_JS_VER', 1.0 );
+			define( 'CAPITOLWORDS_CSS_VER', 1.0 );
+			define( 'CAPITOLWORDS_JS_VER', 1.0 );
 			define( 'CHARTJS_VER', 1.02);
 
 		}
@@ -62,22 +66,31 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 			require( CAPITOLWORDS_SHORTCODES );
 			require( CAPITOLWORDS_WIDGET );
 			require( CAPITOLWORDS_API_CLIENT );
+			require( CAPITOLWORDS_SETTINGS_PAGE );
+			require( CAPITOLWORDS_POST_META_BOX );
 
 		}
 		//in case someone wants to translate stuff 
 		//Need to refactor as I might need to load this differently similar to load_all_scripts()
 		public function capitol_words_charts_load_plugin_textdomain() {
 
-	    	load_plugin_textdomain( 'text-domain', FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	    	load_plugin_textdomain( 'capitol-words', FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 		}
 
 		public function load_all_scripts() {
 
-			wp_enqueue_style( 'capitolwords-styles', CAPITOLWORDS_CSS . 'styles.css', array(), MAIN_CSS_VER, 'all' );
-			wp_enqueue_script( 'main-js', CAPITOLWORDS_JS . 'main.js', array('jquery'), MAIN_JS_VER, true );
+			wp_enqueue_style( 'capitolwords-styles', CAPITOLWORDS_CSS . 'styles.css', array(), CAPITOLWORDS_CSS_VER, 'all' );
+			wp_enqueue_script( 'capitolwords-js', CAPITOLWORDS_JS . 'capitol_words.js', array('jquery'), CAPITOLWORDS_JS_VER, true );
 			wp_enqueue_script( 'chartjs', CHARTJS . 'Chart.js', array(), CHARTJS_VER, false );
 		
+		}
+
+		public function load_admin_scripts() {
+
+			wp_enqueue_style( 'wp-color-picker' );
+    		wp_enqueue_script( 'admin_js', CAPITOLWORDS_JS . 'admin.js', array( 'wp-color-picker' ), false, true );
+
 		}
 		
 	}

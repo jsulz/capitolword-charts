@@ -37,7 +37,7 @@ class CAPITOLWORDS_SHORTCODES {
 
 		$handoff_url = $client->get_final_url();
 
-		wp_localize_script( 'main-js', 'postdata', array(
+		wp_localize_script( 'capitolwords-js', 'postdata', array(
 
 				'json_url' => $handoff_url
 

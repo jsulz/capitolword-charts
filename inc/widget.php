@@ -3,22 +3,22 @@
 //no use for this yet - may delete later
 //in the interim, keep around in case you can think of a reason to use this bugger!
 
-add_action( 'widgets_init', 'register_unique_widget_name' );
+add_action( 'widgets_init', 'register_capitolwords_widget' );
 
 //register widget
-function register_unique_widget_name() {
-	register_widget( 'unique_widget_name' );
+function register_capitolwords_widget() {
+	register_widget( 'Capitol_Words_Widget' );
 }
 
 //Unique Widget Name Class
-class Unique_Widget_Name extends WP_Widget {
+class Capitol_Words_Widget extends WP_Widget {
 
 	//Set up widget class name and description
 	function __construct() {
 		
 		parent::__construct(
 			__CLASS__,
-			__('Unique Widget Title' , 'text_domain'),
+			__('Capitol Words Widget' , 'text_domain'),
 			array ('description' 	=> __('This is a bit of text about my unique widget' , 'text_domain'), )
 		);
 	}
