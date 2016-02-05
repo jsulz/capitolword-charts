@@ -46,60 +46,60 @@ class Capitol_Words_Post_Meta_Box {
 
 		?>
 			<div id="date-panel">
-			<p>
-				<label for="capitol-words-phrase">Phrase</label>
-				<input type="text" class="widefat" name="capitol-words-phrase" placeholder="Enter Phrase" />
-			</p>
+					<p>
+						<label for="capitol-words-phrase">Phrase</label>
+						<input type="text" class="widefat" name="capitol-words-phrase" placeholder="Enter Phrase" />
+					</p>
 
-			<p>
-				<label for="capitol-words-granularity">Time to Search (defaults to "daily" if nothing selected)</label>
-				<br />
-				<select name="capitol-words-granularity">
-					<option value="day" selected="selected">By Day</option>
-					<option value="month">By Month</option>
-					<option value="year">By Year</option>
-				</select>			
-			</p>
+					<p>
+						<label for="capitol-words-granularity">Time to Search (defaults to "daily" if nothing selected)</label>
+						<br />
+						<select name="capitol-words-granularity">
+							<option value="day" selected="selected">By Day</option>
+							<option value="month">By Month</option>
+							<option value="year">By Year</option>
+						</select>			
+					</p>
 
-			<p>
-				<label for="capitol-words-start-date">Start Date</label>
-				<input type="text" class="widefat" name="capitol-words-start-date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
-			</p>
+					<p>
+						<label for="capitol-words-start-date">Start Date</label>
+						<input type="text" class="widefat" name="capitol-words-start-date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
+					</p>
 
-			<p>
-				<label for="capitol-words-end-date">End Date</label>
-				<input type="text" class="widefat" name="capitol-words-end-date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
-			</p>
+					<p>
+						<label for="capitol-words-end-date">End Date</label>
+						<input type="text" class="widefat" name="capitol-words-end-date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
+					</p>
 
-			<p>
-				<label for="capitol-words-state">State (Optional)</label>
-				<input type="text" class="widefat" name="capitol-words-state" placeholder="Enter a state you wish to search for as its two letter abbreviation" />
-			</p>
+					<p>
+						<label for="capitol-words-state">State (Optional)</label>
+						<input type="text" class="widefat" name="capitol-words-state" placeholder="Enter a state you wish to search for as its two letter abbreviation" />
+					</p>
 
-			<p>
-				<label for="capitol-words-party">Party (Optional)</label>
-				<br/>
-				<select name="capitol-words-party">
-					<option value="default" selected="selected">Select an Option</option>
-					<option value="D">Democratic Party</option>
-					<option value="R">Republican Party</option>
-					<option value="I">Independent</option>
-				</select>
-			</p>
+					<p>
+						<label for="capitol-words-party">Party (Optional)</label>
+						<br/>
+						<select name="capitol-words-party">
+							<option value="default" selected="selected">Select an Option</option>
+							<option value="D">Democratic Party</option>
+							<option value="R">Republican Party</option>
+							<option value="I">Independent</option>
+						</select>
+					</p>
 
-			<p>
-				<label for="capitol-words-chamber">Chamber (Optional)</label>
-				<br/>
-				<select name="capitol-words-chamber">
-					<option value="default" selected="selected">Select an Option</option>
-					<option value="house">United States House of Representatives</option>
-					<option value="senate">United States Senate</option>
-					<option value="extensions">Independent</option>
-				</select>
-			</p>
-
-				<?php submit_button( 'Preview Your Chart', 'secondary', 'preview', false );?>
+					<p>
+						<label for="capitol-words-chamber">Chamber (Optional)</label>
+						<br/>
+						<select name="capitol-words-chamber">
+							<option value="default" selected="selected">Select an Option</option>
+							<option value="house">United States House of Representatives</option>
+							<option value="senate">United States Senate</option>
+							<option value="extensions">Independent</option>
+						</select>
+					</p>
+					<a id="preview" href="#">Preview Your Chart</a>
 		</div>
+
 
 		<?php
 

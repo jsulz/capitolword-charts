@@ -2,7 +2,8 @@ jQuery(document).ready(function($){
     $('.my-color-field').wpColorPicker();
 });
 
-jQuery(document).ready( function($) {
+jQuery(document).ready(function($) {
+
 
 	var capitolWordsPhrase;
 	var capitolWordsParty;
@@ -17,4 +18,17 @@ jQuery(document).ready( function($) {
 			capitolWordsParty = $(this).val();
 		});
     });
+
+    $("select[name='capitol-words-chamber']" ).change(function(){
+		$("select[name='capitol-words-chamber'] option:selected").each(function(){
+			capitolWordsChamber = $(this).val();
+		});
+    });
+    $('#preview').click(function(event) {
+		event.preventDefault();
+		console.log(capitolWordsParty);
+		console.log(capitolWordsChamber);
+    });
+
+
 });
