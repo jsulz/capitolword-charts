@@ -6,6 +6,8 @@
 
 if( ! defined( 'ABSPATH' ) ) exit;
 
+define( 'API_URL', 'http://capitolwords.org/api/1/dates.json?' );
+
 class CAPITOLWORDS_CLIENT {
 
 	private $final_url;

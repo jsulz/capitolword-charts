@@ -47,14 +47,14 @@ class Capitol_Words_Post_Meta_Box {
 		?>
 			<div id="date-panel">
 					<p>
-						<label for="capitol-words-phrase">Phrase</label>
-						<input type="text" class="widefat" name="capitol-words-phrase" placeholder="Enter Phrase" />
+						<label for="phrase">Phrase</label>
+						<input type="text" class="widefat" name="phrase" placeholder="Enter Phrase" />
 					</p>
 
 					<p>
-						<label for="capitol-words-granularity">Time to Search (defaults to "daily" if nothing selected)</label>
+						<label for="granularity">Time to Search (defaults to "daily" if nothing selected)</label>
 						<br />
-						<select name="capitol-words-granularity">
+						<select name="granularity">
 							<option value="day" selected="selected">By Day</option>
 							<option value="month">By Month</option>
 							<option value="year">By Year</option>
@@ -62,24 +62,24 @@ class Capitol_Words_Post_Meta_Box {
 					</p>
 
 					<p>
-						<label for="capitol-words-start-date">Start Date</label>
-						<input type="text" class="widefat" name="capitol-words-start-date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
+						<label for="start_date">Start Date</label>
+						<input type="text" class="widefat" name="start_date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
 					</p>
 
 					<p>
-						<label for="capitol-words-end-date">End Date</label>
-						<input type="text" class="widefat" name="capitol-words-end-date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
+						<label for="end_date">End Date</label>
+						<input type="text" class="widefat" name="end_date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
 					</p>
 
 					<p>
-						<label for="capitol-words-state">State (Optional)</label>
-						<input type="text" class="widefat" name="capitol-words-state" placeholder="Enter a state you wish to search for as its two letter abbreviation" />
+						<label for="state">State (Optional)</label>
+						<input type="text" class="widefat" name="state" placeholder="Enter a state you wish to search for as its two letter abbreviation" />
 					</p>
 
 					<p>
-						<label for="capitol-words-party">Party (Optional)</label>
+						<label for="party">Party (Optional)</label>
 						<br/>
-						<select name="capitol-words-party">
+						<select name="party">
 							<option value="default" selected="selected">Select an Option</option>
 							<option value="D">Democratic Party</option>
 							<option value="R">Republican Party</option>
@@ -88,9 +88,9 @@ class Capitol_Words_Post_Meta_Box {
 					</p>
 
 					<p>
-						<label for="capitol-words-chamber">Chamber (Optional)</label>
+						<label for="chamber">Chamber (Optional)</label>
 						<br/>
-						<select name="capitol-words-chamber">
+						<select name="chamber">
 							<option value="default" selected="selected">Select an Option</option>
 							<option value="house">United States House of Representatives</option>
 							<option value="senate">United States Senate</option>

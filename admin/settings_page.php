@@ -77,8 +77,8 @@ class CAPITOL_WORDS_SETTINGS {
 
 		$settings = (array) get_option('capitol_words_settings');
 
-		if ( isset( $settings[ 'api_key'] ) ) {
-			$api_key = $settings[ 'api_key'];
+		if ( isset( $settings[ 'api_key' ] ) ) {
+			$api_key = $settings[ 'api_key' ];
 		} else {
 			$api_key ='';
 		}
@@ -158,6 +158,7 @@ class CAPITOL_WORDS_SETTINGS {
 
 		</div>
 		<?php
+
 	}
 }
 
