@@ -12,6 +12,7 @@ jQuery(document).ready(function($) {
 	var capitolWordsEndDate;
 	var capitolWordsState;
 	var capitolWordsChamber;
+	var data;
 
 	var capitolWordsAPIKey =  capitolWordsInfo.api_key;
 	var capitolWordsDateEndpoint =  capitolWordsInfo.date_endpoint;
@@ -55,23 +56,24 @@ jQuery(document).ready(function($) {
 
 		var dateParams = $.param( dateParamObj );
 		var dateRequest = capitolWordsDateEndpoint +  dateParams;
+		var dateLabels = [];
+		var datePoints = [];
 
 		$.ajax({
 			dataType: 'json',
-			url: dateRequest
+			url: dateRequest, 
 		})
 
 		.done(function(response){
 			//console.log(response);
-			var dateLabels = [];
-			var datePoints = [];
 			$.each( response, function(results, object){
 				$.each(object, function(key, object){
-					dateLabels.push(object.year);
+					dateLabels.push(object.capitolWordsGranularity);
 					datePoints.push(object.count);
 				});
 			});
-			var data = {
+			
+			data = {
 				labels: dateLabels,
 				datasets: [
 				{
@@ -86,18 +88,8 @@ jQuery(document).ready(function($) {
 				}]
 			};
 
-			var ctx;
+			respondCanvas( );
 
-			if ( $('#postChart' ) ) {
-				$('#date-panel').next().remove();
-				$('#date-panel').append('<canvas id="postChartredraw" width="400" height="400"></canvas>');
-				ctx = $("#postChartredraw").get(0).getContext("2d");
-			} else {
-				$('#date-panel').append('<canvas id="postChart" width="400" height="400"></canvas>');
-				ctx = $("#postChart").get(0).getContext("2d");
-			}
-			// This will get the first returned node in the jQuery collection.
-			var myNewChart = new Chart(ctx).Line(data);
 		})
 
 		.fail(function(){
@@ -110,5 +102,25 @@ jQuery(document).ready(function($) {
 
     });
 
+function clearCanvas() {
+	var c = $('#summary');
+    var ctx = c.get(0).getContext("2d");
+    ctx.clearRect (0, 0, 400, 290);
+    console.log('done');
+}
 
+function respondCanvas() {
+    var c = $('#summary');
+    var ctx = c.get(0).getContext("2d");
+    var container = c.parent();
+    clearCanvas();
+    var $container = $(container);
+
+    c.attr('width', $container.width()/2); //max width
+
+    c.attr('height', $container.height()/2); //max height
+
+    //Call a function to redraw other content (texts, images etc)
+    var chart = new Chart(ctx).Line(data);
+}
 });

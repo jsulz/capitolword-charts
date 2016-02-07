@@ -98,6 +98,7 @@ class Capitol_Words_Post_Meta_Box {
 						</select>
 					</p>
 					<a id="preview" href="#">Preview Your Chart</a>
+					<canvas id="summary"></canvas>
 		</div>
 
 
