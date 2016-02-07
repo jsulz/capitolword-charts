@@ -80,7 +80,6 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 
 		public function load_all_scripts() {
 
-			wp_enqueue_style( 'capitolwords-styles', CAPITOLWORDS_CSS . 'styles.css', array(), CAPITOLWORDS_CSS_VER, 'all' );
 			wp_enqueue_script( 'capitolwords-js', CAPITOLWORDS_JS . 'capitol_words.js', array('jquery'), CAPITOLWORDS_JS_VER, true );
 			wp_enqueue_script( 'chartjs', CHARTJS . 'Chart.js', array(), CHARTJS_VER, false );
 		
@@ -89,6 +88,7 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 		public function load_admin_scripts() {
 
 			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_style( 'capitolwords-admin-styles', CAPITOLWORDS_CSS . 'admin_styles.css', array(), CAPITOLWORDS_CSS_VER, 'all' );
     		wp_enqueue_script( 'admin_js', CAPITOLWORDS_JS . 'admin.js', array( 'wp-color-picker' ), false, true );
 			wp_enqueue_script( 'chartjs', CHARTJS . 'Chart.js', array(), CHARTJS_VER, false );
     		$settings = get_option('capitol_words_settings');

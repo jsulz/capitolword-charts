@@ -7,42 +7,59 @@ jQuery(document).ready(function($) {
 
 	var capitolWordsPhrase;
 	var capitolWordsParty;
-	var capitolWordsGranularity;
+	var capitolWordsGranularity = 'year';
 	var capitolWordsStartDate;
 	var capitolWordsEndDate;
 	var capitolWordsState;
 	var capitolWordsChamber;
 	var data;
+	var dateChart;
 
 	var capitolWordsAPIKey =  capitolWordsInfo.api_key;
 	var capitolWordsDateEndpoint =  capitolWordsInfo.date_endpoint;
 
-    $("select[name='party']" ).change(function(){
-		$("select[name='party'] option:selected").each(function(){
+	var phraseInput = $( "input[name=phrase]" );
+	var partyInput = $( "select[name=party]" );
+	var granularityInput = $( "select[name=granularity]" );
+	var startDateInput = $( "input[name=start_date]" );
+	var endDateInput = $( "input[name=end_date]" );
+	var stateInput = $( "input[name=state]" );
+	var chamberInput = $( "select[name=chamber]" );
+
+    $( partyInput ).change( function() {
+		$("select[name='party'] option:selected").each( function () {
 			capitolWordsParty = $(this).val();
 		});
     });
 
-    $("select[name='granularity']" ).change(function(){
-		$("select[name='granularity'] option:selected").each(function(){
+    $( granularityInput ).change( function() {
+		$("select[name='granularity'] option:selected").each( function () {
 			capitolWordsGranularity = $(this).val();
 		});
     });
 
-    $("select[name='chamber']" ).change(function(){
-		$("select[name='chamber'] option:selected").each(function(){
+    $( chamberInput ).change( function() {
+		$("select[name=chamber] option:selected").each( function () {
 			capitolWordsChamber = $(this).val();
 		});
     });
-    $('#preview').on('click', function(event) {
+    $( '#preview' ).on( 'click', function( event ) {
 
 		event.preventDefault();
-		capitolWordsPhrase = $("input[name=phrase]").val();
-		capitolWordsStartDate = $("input[name=start_date]").val();
-		capitolWordsEndDate = $("input[name=end_date]").val();
-		capitolWordsState = $("input[name=state]").val();
+		capitolWordsPhrase = $( phraseInput ).val();
+		capitolWordsStartDate = $( startDateInput ).val();
+		capitolWordsEndDate = $( endDateInput ).val();
+		capitolWordsState = $( stateInput ).val();
 
-		var dateParamObj = {
+		//check to see if the phrase input has a value - if it doesn't, give some feedback
+		if ( !capitolWordsPhrase ) {
+			$( phraseInput ).addClass('failed');
+			return;
+		} else if ( capitolWordsPhrase && phraseInput.hasClass( 'failed' ) ) {
+			$( phraseInput ).removeClass('failed');
+		}
+
+		var uncleanedParams = {
 			phrase: capitolWordsPhrase,
 			percentages: false,
 			granularity: capitolWordsGranularity,
@@ -54,21 +71,23 @@ jQuery(document).ready(function($) {
 			apikey: capitolWordsAPIKey,
 		};
 
-		var dateParams = $.param( dateParamObj );
+		var cleanedParams = doesExistValidation( uncleanedParams );
+
+		var dateParams = $.param( cleanedParams );
 		var dateRequest = capitolWordsDateEndpoint +  dateParams;
 		var dateLabels = [];
 		var datePoints = [];
 
 		$.ajax({
 			dataType: 'json',
-			url: dateRequest, 
+			url: dateRequest,
 		})
 
 		.done(function(response){
 			//console.log(response);
 			$.each( response, function(results, object){
 				$.each(object, function(key, object){
-					dateLabels.push(object.capitolWordsGranularity);
+					dateLabels.push(object[capitolWordsGranularity]);
 					datePoints.push(object.count);
 				});
 			});
@@ -77,7 +96,9 @@ jQuery(document).ready(function($) {
 				labels: dateLabels,
 				datasets: [
 				{
-					label: "My First dataset",
+
+					label: "Capitol Words",
+					responsive: true,
 					fillColor: "rgba(220,220,220,0.2)",
 					strokeColor: "rgba(220,220,220,1)",
 					pointColor: "rgba(220,220,220,1)",
@@ -85,6 +106,7 @@ jQuery(document).ready(function($) {
 					pointHighlightFill: "#fff",
 					pointHighlightStroke: "rgba(220,220,220,1)",
 					data: datePoints
+
 				}]
 			};
 
@@ -102,25 +124,49 @@ jQuery(document).ready(function($) {
 
     });
 
-function clearCanvas() {
-	var c = $('#summary');
-    var ctx = c.get(0).getContext("2d");
-    ctx.clearRect (0, 0, 400, 290);
-    console.log('done');
-}
+	function respondCanvas() {
+		if (dateChart) {
+			dateChart.destroy();
+		}
+		var c = $('#summary');
+		var cParent = c.parent();
+		var ctx = c.get(0).getContext("2d");
+		var container = $('#date-panel');
+		var $container = $(container);
 
-function respondCanvas() {
-    var c = $('#summary');
-    var ctx = c.get(0).getContext("2d");
-    var container = c.parent();
-    clearCanvas();
-    var $container = $(container);
+		c.attr('width', cParent.width()); //max width
 
-    c.attr('width', $container.width()/2); //max width
+		c.attr('height', cParent.height() ); //max height
 
-    c.attr('height', $container.height()/2); //max height
+		//Call a function to redraw other content (texts, images etc)
+		dateChart = new Chart(ctx).Line(data);
+	}
 
-    //Call a function to redraw other content (texts, images etc)
-    var chart = new Chart(ctx).Line(data);
-}
+	//a function to see if the parameters exist - if they don't, then remove them from the object
+	function doesExistValidation( object ) {
+
+		for ( var prop in object ) {
+
+			if ( !object[prop] ) {
+				delete object[prop];
+			} else if ( prop == 'start_date' || prop == 'end_date' ) {
+				var checkDate = dateValidation( object[prop] );
+				if ( !checkDate ) {
+					delete object[prop];
+				}
+			}
+
+		}
+
+		return object;
+
+	}
+
+	//a function to clean up the dates - if they're not valid, then stop the presses!
+	function dateValidation( date ) {
+
+		var pass = /^\d{4}-\d{2}-\d{2}/.test( date );
+		return pass;
+
+	}
 });

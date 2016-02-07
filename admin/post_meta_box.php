@@ -52,22 +52,23 @@ class Capitol_Words_Post_Meta_Box {
 					</p>
 
 					<p>
-						<label for="granularity">Time to Search (defaults to "daily" if nothing selected)</label>
+						<label for="granularity">Time to Search (defaults to "by year" if nothing selected)</label>
 						<br />
 						<select name="granularity">
-							<option value="day" selected="selected">By Day</option>
+							<option value="">Select an Option</option>
+							<option value="day">By Day</option>
 							<option value="month">By Month</option>
 							<option value="year">By Year</option>
 						</select>			
 					</p>
 
 					<p>
-						<label for="start_date">Start Date</label>
+						<label for="start_date">Start Date (can be no earlier than 1996-01-01)</label>
 						<input type="text" class="widefat" name="start_date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
 					</p>
 
 					<p>
-						<label for="end_date">End Date</label>
+						<label for="end_date">End Date (can be no later than the current date of <?php echo date('Y-m-d')?>)</label>
 						<input type="text" class="widefat" name="end_date" placeholder="Enter Start Date in a YYYY-MM-DD Format" />
 					</p>
 
@@ -80,7 +81,7 @@ class Capitol_Words_Post_Meta_Box {
 						<label for="party">Party (Optional)</label>
 						<br/>
 						<select name="party">
-							<option value="default" selected="selected">Select an Option</option>
+							<option value="" >All Parties</option>
 							<option value="D">Democratic Party</option>
 							<option value="R">Republican Party</option>
 							<option value="I">Independent</option>
@@ -91,7 +92,7 @@ class Capitol_Words_Post_Meta_Box {
 						<label for="chamber">Chamber (Optional)</label>
 						<br/>
 						<select name="chamber">
-							<option value="default" selected="selected">Select an Option</option>
+							<option value="">All Chambers</option>
 							<option value="house">United States House of Representatives</option>
 							<option value="senate">United States Senate</option>
 							<option value="extensions">Independent</option>
