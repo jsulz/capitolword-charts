@@ -92,6 +92,7 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
     		wp_enqueue_script( 'admin_js', CAPITOLWORDS_JS . 'admin.js', array( 'wp-color-picker' ), false, true );
 			wp_enqueue_script( 'chartjs', CHARTJS . 'Chart.js', array(), CHARTJS_VER, false );
     		$settings = get_option('capitol_words_settings');
+    		
     		wp_localize_script( 'admin_js', 'capitolWordsInfo', array(
 
     				'api_key' => $settings['api_key'],

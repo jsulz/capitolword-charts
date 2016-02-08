@@ -59,6 +59,9 @@ jQuery(document).ready(function($) {
 			$( phraseInput ).removeClass('failed');
 		}
 
+		$('#shortcode').show();
+		$('#summary').show();
+
 		var uncleanedParams = {
 			phrase: capitolWordsPhrase,
 			percentages: false,
@@ -122,6 +125,18 @@ jQuery(document).ready(function($) {
 
 		});
 
+		$('#shortcode').on('click', function(event){
+			event.preventDefault();
+			var shortcode = '';
+			shortcode = '[capitolwords ';
+			for ( var prop in cleanedParams ) {
+				if ( prop == 'apikey') continue;
+				shortcode += prop + '="' + cleanedParams[prop] + '" ';
+			}
+			shortcode += ' ]';
+			$('#date-panel').append('<p id="clearthis">' + shortcode + '</p>');
+		});
+
     });
 
 	function respondCanvas() {
@@ -134,9 +149,9 @@ jQuery(document).ready(function($) {
 		var container = $('#date-panel');
 		var $container = $(container);
 
-		c.attr('width', cParent.width()); //max width
+		c.attr('width', cParent.width()/2 ); //max width
 
-		c.attr('height', cParent.height() ); //max height
+		c.attr('height', cParent.height()/2 ); //max height
 
 		//Call a function to redraw other content (texts, images etc)
 		dateChart = new Chart(ctx).Line(data);
@@ -169,4 +184,5 @@ jQuery(document).ready(function($) {
 		return pass;
 
 	}
+
 });
