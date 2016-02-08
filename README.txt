@@ -1,2 +1,2 @@
 # capitolword-charts
-A plugin that allows you to draw charts from the Capitol Words API using the chart.js library - see the README for more information
+Need to add some info here! Until then, just check out Sunlight Foundation (http://sunlightfoundation.com/api/) if you're interested.
