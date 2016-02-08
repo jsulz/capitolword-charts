@@ -80,7 +80,6 @@ if( ! class_exists( 'CAPITOLWORDS_CHARTS' ) ) {
 
 		public function load_all_scripts() {
 
-			wp_enqueue_script( 'capitolwords-js', CAPITOLWORDS_JS . 'capitol_words.js', array('jquery'), CAPITOLWORDS_JS_VER, true );
 			wp_enqueue_script( 'chartjs', CHARTJS . 'Chart.js', array(), CHARTJS_VER, false );
 		
 		}

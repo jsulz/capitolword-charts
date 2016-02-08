@@ -44,6 +44,9 @@ class CAPITOLWORDS_SHORTCODES {
 		$baseline_html .= '<div id="'. $atts['phrase'] . $atts['granularity'] .'">'; 
 		$baseline_html .= '<a href="#" class="'. $atts['phrase'] . $atts['granularity'] .'">' . $atts['label'] . $atts['start_date'] . $atts['end_date']. '</a>';
 		$baseline_html .= '</div>';
+
+		//unfortunately, we can't localize the data in a seperate JS file for a variety of reasons
+		//so we're just going do dump some script tags with our jQuery in here and call it good
 		$baseline_html .= '<script>';
 		$baseline_html .= "jQuery(document).ready(function($){
 
