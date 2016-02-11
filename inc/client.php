@@ -74,7 +74,6 @@ class CAPITOLWORDS_CLIENT {
 
 		$response = wp_remote_get( $url );
 		$body = wp_remote_retrieve_body( $response );
-		//$body = json_decode( $response );
 		return $body;
 
 	}

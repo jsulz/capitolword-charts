@@ -14,6 +14,7 @@ jQuery(document).ready(function($) {
 	var capitolWordsChamber;
 	var data;
 	var dateChart;
+	var shortcode;
 
 	var capitolWordsAPIKey =  capitolWordsInfo.api_key;
 	var capitolWordsDateEndpoint =  capitolWordsInfo.date_endpoint;
@@ -127,14 +128,16 @@ jQuery(document).ready(function($) {
 
 		$('#shortcode').on('click', function(event){
 			event.preventDefault();
-			var shortcode = '';
+			$('#shortcode').remove();
+			shortcode = '';
 			shortcode = '[capitolwords ';
 			for ( var prop in cleanedParams ) {
 				if ( prop == 'apikey') continue;
 				shortcode += prop + '="' + cleanedParams[prop] + '" ';
 			}
 			shortcode += ' ]';
-			$('#date-panel').append('<p id="clearthis">' + shortcode + '</p>');
+			$('#date-panel').append('<p>' + shortcode + '</p>');
+
 		});
 
     });
